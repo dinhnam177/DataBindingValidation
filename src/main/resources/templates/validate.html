@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>Sign Up</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="center">
+  <h1>Thông tin</h1>
+  <form th:action="@{/validate}"  method="post" th:object="${user}">
+    <div class="txt_field">
+      <input  th:field="*{name}" id="name"  type="text">
+      <label>Name</label>
+    </div>
+    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red"></p>
+    <div class="txt_field">
+      <input th:field="*{address}" type="text">
+      <label>Address</label>
+    </div>
+    <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" style="color: red"></p>
+    <div class="txt_field">
+      <input th:field="*{phone}" id="phone"  type="text">
+      <label>Phone Number</label>
+    </div>
+    <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" style="color: red"></p> <br>
+
+    <div th:if="${#fields.hasAnyErrors()}">
+      <ul>
+        <li th:each="err : ${#fields.allErrors()}" th:text="${err}" class="error"/>
+      </ul>
+    </div>
+
+    <input type="submit" value="Submit">
+  </form>
+</div>
+</body>
+</html>
